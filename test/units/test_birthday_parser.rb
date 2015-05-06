@@ -9,20 +9,20 @@ class TestBirthday < Minitest::Test
   end
 
   def test_parse_yesterday
-    expected = Date.civil(2016,05,04)
-    actual = Birthday.parse("05/04")
+    expected = (Date.today - 1).next_year
+    actual = Birthday.parse("#{expected.month}/#{expected.day}")
     assert_equal expected, actual
   end
 
   def test_parse_today
     expected = Date.today
-    actual = Birthday.parse("05/05")
+    actual = Birthday.parse("#{expected.month}/#{expected.day}")
     assert_equal expected, actual
   end
 
   def test_parse_tommorrow
-    expected = Date.civil(2015,05,06)
-    actual = Birthday.parse("05/06")
+    expected = Date.today + 1
+    actual = Birthday.parse("#{expected.month}/#{expected.day}")
     assert_equal expected, actual
   end
 

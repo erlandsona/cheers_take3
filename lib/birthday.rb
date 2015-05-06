@@ -1,12 +1,17 @@
 class Birthday
   def self.parse(birthday)
-    return nil if birthday.include("")
-    birth_day_arr = birthday.split('/')
-    today = Date.today
-    if birth_day_arr[1].to_i == 2
-      birthday = Date.civil(Date.today.year + 1, birth_day_arr[0].to_i,birth_day_arr[1].to_i)
-    else
-      birthday = Date.civil(Date.today.year, birth_day_arr[0].to_i,birth_day_arr[1].to_i)
+    year = Date.today.year
+    month, day = birthday.split('/').map(&:to_i)
+
+    return nil if month.nil? or day.nil?
+    if Date.valid_civil?(year, month, day)
+      next_birthday = Date.civil(year, month.to_i, day.to_i)
+      if next_birthday < Date.today
+        next_birthday = next_birthday.next_year
+      end
+      next_birthday
+    elsif Date.valid_civil?(year + 1, month, day)
+      next_birthday = Date.civil(year + 1, month, day)
     end
   end
 end
