@@ -10,27 +10,6 @@ class TestCheer < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_happy_path_name
-    actual = Cheer.for_person("Ed")
-    expected = "Give me an.. E!\n" +
-               "Give me a... D!\n" +
-               "Ed's just GRAND!"
-    assert_equal expected, actual
-  end
-
-
-
-  def test_name_with_spaces
-    actual = Cheer.for_person("Bo Bur")
-    expected = "Give me a... B!\n" +
-               "Give me an.. O!\n" +
-               "Give me a... B!\n" +
-               "Give me a... U!\n" +
-               "Give me an.. R!\n" +
-               "Bo Bur's just GRAND!"
-    assert_equal expected, actual
-  end
-
   def test_name_with_spaces
     actual = Cheer.for_person("Mary Jane")
     expected = "Give me an.. M!\n" +
@@ -42,22 +21,6 @@ class TestCheer < Minitest::Test
                "Give me an.. N!\n" +
                "Give me an.. E!\n" +
                "Mary Jane's just GRAND!"
-    assert_equal expected, actual
-  end
-
-
-
-
-
-
-  def test_name_with_hyphens
-    actual = Cheer.for_person("Bo-Bur")
-    expected = "Give me a... B!\n" +
-               "Give me an.. O!\n" +
-               "Give me a... B!\n" +
-               "Give me a... U!\n" +
-               "Give me an.. R!\n" +
-               "Bo-Bur's just GRAND!"
     assert_equal expected, actual
   end
 
@@ -75,40 +38,15 @@ class TestCheer < Minitest::Test
     assert_equal expected, actual
   end
 
-
-
-
-
-  def test_name_thats_blank
-    actual = Cheer.for_person("")
-    expected = "I'm sorry, what was your name again?"
-    assert_equal expected, actual
-  end
-
-  def test_name_thats_all_whitespace
-    assert_raises(ArgumentError) do
-      Cheer.for(" ")
-    end
-  end
-
-  def test_name_that_has_no_word_characters
-    actual = Cheer.for_person(" ")
-    expected = "Give me an.. E!\n" +
-               "Give me a... D!\n" +
-               "Ed's just GRAND!"
-    assert_equal expected, actual
-  end
-
-
   def test_name_thats_blank
     assert_raises(ArgumentError) do
-      Cheer.for_person("")
+      Cheer.for("")
     end
   end
 
   def test_name_thats_all_whitespace
     assert_raises(ArgumentError) do
-      Cheer.for_person("  ")
+      Cheer.for("   ")
     end
   end
 
@@ -123,8 +61,6 @@ class TestCheer < Minitest::Test
       Cheer.for_person("08/25")
     end
   end
-
-
 
   def test_all_an_letters
     actual = Cheer.for_person("AEFHILMNORSX")
