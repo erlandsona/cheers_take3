@@ -40,13 +40,13 @@ class TestCheer < Minitest::Test
 
   def test_name_thats_blank
     assert_raises(ArgumentError) do
-      Cheer.for("")
+      Cheer.for_person("")
     end
   end
 
   def test_name_thats_all_whitespace
     assert_raises(ArgumentError) do
-      Cheer.for("   ")
+      Cheer.for_person("   ")
     end
   end
 
@@ -111,4 +111,3 @@ class TestCheer < Minitest::Test
   end
 end
 
-end

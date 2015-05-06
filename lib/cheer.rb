@@ -1,30 +1,28 @@
+require_relative 'birthday'
 class Cheer
   def self.for_person(name)
-    raise ArgumentError unless valid_name?(name)
-    cheer = ""
     cheerable_name = name.upcase.gsub(/[^A-Z]/, "")
+    raise ArgumentError if cheerable_name.empty?
+    cheer = ""
     cheerable_name.each_char do |char|
-      if "HALFNORSEMIX".include?(char)
-        article = "n.."
-      else
-        article = "..."
-      end
+      "HALFNORSEMIX".include?(char) ? article = "n.." : article = "..."
       cheer << "Give me a#{article} #{char}!\n"
     end
     cheer << "#{name}'s just GRAND!"
   end
 
-
-  def self.valid_name?(name)
-    cheerable_name = name.upcase.gsub(/[^A-Z]/, "")
-    !cheerable_name.empty?
+  def self.for_birthday(birthday)
+    today = Date.today
+    next_birthday = Birthday.parse(birthday)
+    difference = next_birthday - today
+    case difference
+    when 0
+    # Today is their birthday
+    when 1
+    #Use the singular?
+    else
+    #Use the plural?
+    end
   end
-
-
-
-
-
-
-
 
 end
